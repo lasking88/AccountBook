@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AccountBook</string>
+    <string name="tab0">Input</string>
+    <string name="tab1">Details</string>
+    <string name="tab2">Statistics</string>
+    <string name="tab3">Receipt</string>
+    <string name="tab4">Setting</string>
 </resources>
