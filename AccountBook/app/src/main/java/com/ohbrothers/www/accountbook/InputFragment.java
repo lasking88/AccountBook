@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,43 +27,79 @@ import java.util.Locale;
 
 public class InputFragment extends Fragment {
 
+    private static final String CALENDAR_KEY = "Calendar";
+
     private RecyclerView mRecyclerView;
+    private DayAdapter mDayAdapter;
     private Calendar mCalendar;
     private String mTitle;
     private List<MyDate> mMonth;
+    private TextView mMonthTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCalendar = Calendar.getInstance();
-        update();
+        if (savedInstanceState == null)
+            mCalendar = Calendar.getInstance();
+        else
+            mCalendar = (Calendar)savedInstanceState.getSerializable(CALENDAR_KEY);
+        mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(CALENDAR_KEY, mCalendar);
     }
 
     private void update() {
         mMonth = new ArrayList<>();
         mCalendar.set(Calendar.DAY_OF_MONTH, 1);
+        int maxdates = mCalendar.getActualMaximum(Calendar.WEEK_OF_MONTH);
         mTitle = mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         mCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        for (int day = 1; day < 36; day++) {
+        for (int day = 0; day < maxdates * 7; day++) {
             MyDate date = new MyDate(mCalendar.getTimeInMillis());
             mMonth.add(date);
             mCalendar.add(Calendar.DAY_OF_MONTH, 1);
         }
+        mCalendar.add(Calendar.DAY_OF_MONTH, -15);
+        mDayAdapter = new DayAdapter(mMonth);
+        mRecyclerView.setAdapter(mDayAdapter);
+        mMonthTextView.setText(mTitle);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_input, container, false);
-        TextView monthTextView = (TextView)view.findViewById(R.id.month_text_view);
-        monthTextView.setText(mTitle);
         mRecyclerView = (RecyclerView)view.findViewById(R.id.calander_recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),7));
-        mRecyclerView.setAdapter(new DayAdapter(mMonth));
+        mMonthTextView = (TextView)view.findViewById(R.id.month_text_view);
+        mMonthTextView.setText(mTitle);
         mRecyclerView.addItemDecoration(new GridDividerItemDecoration(
                 ContextCompat.getDrawable(getActivity(), R.drawable.verticaldivider),
                 ContextCompat.getDrawable(getActivity(), R.drawable.horizontaldivider),
                 7
         ));
+
+        ImageButton nextMonth = (ImageButton)view.findViewById(R.id.next_month_button);
+        nextMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCalendar.add(Calendar.DAY_OF_MONTH, 30);
+                update();
+            }
+        });
+
+        ImageButton previousMonth = (ImageButton)view.findViewById(R.id.previous_month_button);
+        previousMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCalendar.add(Calendar.DAY_OF_MONTH, -30);
+                update();
+            }
+        });
+        update();
         return view;
     }
 
@@ -87,8 +124,12 @@ public class InputFragment extends Fragment {
             mMyDate = myDate;
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d");
             mDateTextView.setText(simpleDateFormat.format(mMyDate));
-            mIncomeTextView.setText("" + mMyDate.getIncome());
-            mOutcomeTextView.setText("" + mMyDate.getOutcome());
+            if (mMyDate.getIncome() != 0) {
+                mIncomeTextView.setText("" + mMyDate.getIncome());
+            }
+            if (mMyDate.getOutcome() != 0) {
+                mOutcomeTextView.setText("" + mMyDate.getOutcome());
+            }
         }
 
         @Override

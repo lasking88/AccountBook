@@ -11,6 +11,7 @@
         android:layout_height="wrap_content">
 
         <ImageButton
+            android:id="@+id/previous_month_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@mipmap/left_arrow_black"/>
@@ -26,6 +27,7 @@
             android:textSize="24sp"/>
 
         <ImageButton
+            android:id="@+id/next_month_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@mipmap/right_arrow_black"/>
