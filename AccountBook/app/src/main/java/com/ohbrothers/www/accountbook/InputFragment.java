@@ -1,23 +1,32 @@
 package com.ohbrothers.www.accountbook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration;
+import com.ohbrothers.www.accountbook.model.DataLab;
+import com.ohbrothers.www.accountbook.model.InOutcome;
 import com.ohbrothers.www.accountbook.model.MyDate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -28,6 +37,8 @@ import java.util.Locale;
 public class InputFragment extends Fragment {
 
     private static final String CALENDAR_KEY = "Calendar";
+    public static final String EXTRA_DATE = "com.ohbrothers.www.acountbook.date";
+
 
     private RecyclerView mRecyclerView;
     private DayAdapter mDayAdapter;
@@ -44,6 +55,7 @@ public class InputFragment extends Fragment {
         else
             mCalendar = (Calendar)savedInstanceState.getSerializable(CALENDAR_KEY);
         mCalendar.setFirstDayOfWeek(Calendar.MONDAY);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -52,14 +64,50 @@ public class InputFragment extends Fragment {
         outState.putSerializable(CALENDAR_KEY, mCalendar);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_input, menu);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        update();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.new_inoutcome :
+                Intent intent = new Intent(getActivity(), InputActivity.class);
+                Date today = new Date();
+                intent.putExtra(EXTRA_DATE, today);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void update() {
         mMonth = new ArrayList<>();
         mCalendar.set(Calendar.DAY_OF_MONTH, 1);
         int maxdates = mCalendar.getActualMaximum(Calendar.WEEK_OF_MONTH);
         mTitle = mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         mCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (int day = 0; day < maxdates * 7; day++) {
-            MyDate date = new MyDate(mCalendar.getTimeInMillis());
+            long millis = mCalendar.getTimeInMillis();
+            MyDate date = new MyDate(millis);
+            if (!mTitle.equals(mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()))) {
+                date.setCurrentMonth(false);
+            } else {
+                date.setCurrentMonth(true);
+            }
+            DataLab dataLab = DataLab.get();
+            String key = simpleDateFormat.format(millis);
+            date.setInOutcomes(dataLab.getData(key));
             mMonth.add(date);
             mCalendar.add(Calendar.DAY_OF_MONTH, 1);
         }
@@ -107,6 +155,7 @@ public class InputFragment extends Fragment {
 
         private MyDate mMyDate;
 
+        private RelativeLayout mLayout;
         private TextView mDateTextView;
         private TextView mIncomeTextView;
         private TextView mOutcomeTextView;
@@ -114,6 +163,7 @@ public class InputFragment extends Fragment {
         public DayHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_calendar, parent, false));
 
+            mLayout = (RelativeLayout)itemView.findViewById(R.id.list_item_layout);
             mDateTextView = (TextView)itemView.findViewById(R.id.date_text_view);
             mIncomeTextView = (TextView)itemView.findViewById(R.id.income_text_view);
             mOutcomeTextView = (TextView)itemView.findViewById(R.id.outcome_text_view);
@@ -124,17 +174,39 @@ public class InputFragment extends Fragment {
             mMyDate = myDate;
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d");
             mDateTextView.setText(simpleDateFormat.format(mMyDate));
-            if (mMyDate.getIncome() != 0) {
-                mIncomeTextView.setText("" + mMyDate.getIncome());
+            if (!mMyDate.isCurrentMonth()) {
+                mLayout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorGray));
+            } else {
+                mLayout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorWhite));
             }
-            if (mMyDate.getOutcome() != 0) {
-                mOutcomeTextView.setText("" + mMyDate.getOutcome());
+            if (mMyDate.getInOutcomes() != null) {
+                int income = 0;
+                int outcome = 0;
+                for(InOutcome ioc : mMyDate.getInOutcomes()) {
+                    int inOutcome = ioc.getInOutcome();
+                    if (inOutcome > 0) {
+                        income += inOutcome;
+                    } else {
+                        outcome += inOutcome;
+                    }
+                }
+                if (income != 0) {
+                    mIncomeTextView.setText("" + income);
+                }
+                if (outcome != 0) {
+                    mOutcomeTextView.setText("" + outcome);
+                }
+            } else {
+                mIncomeTextView.setText("");
+                mOutcomeTextView.setText("");
             }
         }
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(), "is clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), InputActivity.class);
+            intent.putExtra(EXTRA_DATE, mMyDate);
+            startActivity(intent);
         }
     }
 
