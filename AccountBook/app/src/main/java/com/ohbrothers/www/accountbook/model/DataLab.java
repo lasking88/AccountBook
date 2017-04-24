@@ -56,5 +56,7 @@ public class DataLab {
         addData("2017-04-23", ioc3);
         InOutcome ioc4 = new InOutcome(-2000, "snacks");
         addData("2017-04-23", ioc4);
+        InOutcome ioc5 = new InOutcome(10000, "Beers");
+        addData("2017-01-03", ioc5);
     }
 }

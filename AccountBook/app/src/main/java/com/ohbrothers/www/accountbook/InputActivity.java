@@ -126,7 +126,7 @@ public class InputActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if (mPreviousView != null) {
-                mPreviousView.setBackgroundColor(ContextCompat.getColor(InputActivity.this, R.color.colorWhite));
+                mPreviousView.setBackground(null);
             }
             mSelectedPos = mPosition;
             v.setBackgroundColor(ContextCompat.getColor(InputActivity.this, R.color.colorGray));
