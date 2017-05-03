@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration;
 import com.ohbrothers.www.accountbook.model.DataLab;
 
 import java.text.SimpleDateFormat;
@@ -101,6 +102,7 @@ public class StatisticsFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.statistics_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(ContextCompat.getDrawable(getActivity(), R.drawable.horizontaldivider)));
 
         return view;
     }

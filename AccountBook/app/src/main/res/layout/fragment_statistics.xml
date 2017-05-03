@@ -37,6 +37,9 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorPrimaryBright"
         android:gravity="center">
 
         <TextView
@@ -44,22 +47,66 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="2017-05-02"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" ~ "
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/end_date_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="2017-05-02"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/statistics_item_income_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:text="Income"/>
+
+        <TextView
+            android:id="@+id/statistics_item_outcome_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:text="Outcome"/>
+
+        <TextView
+            android:id="@+id/statistics_item_total_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:text="Total"/>
+
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/horizontaldivider"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/statistics_recycler_view"
