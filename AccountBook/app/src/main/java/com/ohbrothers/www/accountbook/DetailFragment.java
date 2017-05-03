@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.linear.EndOffsetItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.linear.StartOffsetItemDecoration;
 import com.ohbrothers.www.accountbook.model.DataLab;
 import com.ohbrothers.www.accountbook.model.InOutcome;
 import com.ohbrothers.www.accountbook.model.MyDate;
@@ -34,6 +37,9 @@ public class DetailFragment extends Fragment {
     private static final int REQUEST_DATE = 0;
 
     private TextView mDateTextView;
+    private TextView mTotalTextView;
+    private TextView mIncomeTextView;
+    private TextView mOutcomeTextView;
     private MyDate mMyDate;
     private SimpleDateFormat mSimpleDateFormat;
     private RecyclerView mRecyclerView;
@@ -68,8 +74,15 @@ public class DetailFragment extends Fragment {
             }
         });
 
+        mTotalTextView = (TextView)view.findViewById(R.id.total_day_text_view);
+        mIncomeTextView = (TextView)view.findViewById(R.id.day_income_text_view);
+        mOutcomeTextView = (TextView)view.findViewById(R.id.day_outcome_text_view);
+
         mRecyclerView = (RecyclerView)view.findViewById(R.id.detail_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(new StartOffsetItemDecoration(10));
+        mRecyclerView.addItemDecoration(new EndOffsetItemDecoration(10));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(ContextCompat.getDrawable(getActivity(), R.drawable.horizontaldivider)));
         updateMyDate();
 
         return view;
@@ -77,11 +90,32 @@ public class DetailFragment extends Fragment {
 
     private void updateMyDate() {
         DataLab dataLab = DataLab.get();
-        mMyDate.setInOutcomes(dataLab.getData(mSimpleDateFormat.format(mMyDate)));
-        if (mMyDate.getInOutcomes() != null)
-            mRecyclerView.setAdapter(new DayAdapter(mMyDate.getInOutcomes()));
-        else
+        List<InOutcome> dailyInoutcome = dataLab.getData(mSimpleDateFormat.format(mMyDate));
+        mMyDate.setInOutcomes(dailyInoutcome);
+        int income = 0, outcome = 0, total = 0;
+        if (mMyDate.getInOutcomes() != null) {
+            mRecyclerView.setAdapter(new DayAdapter(dailyInoutcome));
+
+            for (InOutcome io : dailyInoutcome) {
+                int inoutcome = io.getInOutcome();
+                if (inoutcome > 0) {
+                    income += inoutcome;
+                } else if (inoutcome < 0) {
+                    outcome += inoutcome;
+                }
+            }
+            total = income + outcome;
+            if (total >= 0) {
+                mTotalTextView.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorGreen));
+            } else {
+                mTotalTextView.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorRed));
+            }
+        } else
             mRecyclerView.setAdapter(null);
+
+        mIncomeTextView.setText("" + income);
+        mOutcomeTextView.setText("" + outcome);
+        mTotalTextView.setText("" + total);
     }
 
     @Override
