@@ -1,4 +1,4 @@
-package com.ohbrothers.www.accountbook;
+package com.ohbrothers.www.accountbook.controller;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,12 +12,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration;
+import com.ohbrothers.www.accountbook.R;
 import com.ohbrothers.www.accountbook.model.DataLab;
 
 import java.text.SimpleDateFormat;
@@ -89,12 +88,12 @@ public class StatisticsFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 switch (checkedId) {
                     case R.id.weekly_button:
-                        if (DataLab.get().retrieveWeeklyData(mStartDate, mEndDate) != null)
-                            mRecyclerView.setAdapter(new StatisticsAdapter(DataLab.get().retrieveWeeklyData(mStartDate, mEndDate)));
+                        if (DataLab.get(getActivity()).retrieveWeeklyData(mStartDate, mEndDate) != null)
+                            mRecyclerView.setAdapter(new StatisticsAdapter(DataLab.get(getActivity()).retrieveWeeklyData(mStartDate, mEndDate)));
                         break;
                     case R.id.monthly_button :
-                        if (DataLab.get().retrieveMontlyData(mStartDate, mEndDate) != null)
-                            mRecyclerView.setAdapter(new StatisticsAdapter(DataLab.get().retrieveMontlyData(mStartDate, mEndDate)));
+                        if (DataLab.get(getActivity()).retrieveMontlyData(mStartDate, mEndDate) != null)
+                            mRecyclerView.setAdapter(new StatisticsAdapter(DataLab.get(getActivity()).retrieveMontlyData(mStartDate, mEndDate)));
                         break;
                 }
             }
@@ -119,12 +118,12 @@ public class StatisticsFragment extends Fragment {
             startDateTextView.setText(mSimpleDateFormat.format(mStartDate));
             switch (mRadioGroup.getCheckedRadioButtonId()) {
                 case R.id.weekly_button :
-                    if (DataLab.get().retrieveWeeklyData(mStartDate, mEndDate) != null)
-                        mRecyclerView.setAdapter(new StatisticsAdapter(DataLab.get().retrieveWeeklyData(mStartDate, mEndDate)));
+                    if (DataLab.get(getActivity()).retrieveWeeklyData(mStartDate, mEndDate) != null)
+                        mRecyclerView.setAdapter(new StatisticsAdapter(DataLab.get(getActivity()).retrieveWeeklyData(mStartDate, mEndDate)));
                     break;
                 case R.id.monthly_button :
-                    if (DataLab.get().retrieveMontlyData(mStartDate, mEndDate) != null)
-                        mRecyclerView.setAdapter(new StatisticsAdapter(DataLab.get().retrieveMontlyData(mStartDate, mEndDate)));
+                    if (DataLab.get(getActivity()).retrieveMontlyData(mStartDate, mEndDate) != null)
+                        mRecyclerView.setAdapter(new StatisticsAdapter(DataLab.get(getActivity()).retrieveMontlyData(mStartDate, mEndDate)));
                     break;
             }
         } else if (requestCode == REQUEST_END_DATE) {
@@ -134,12 +133,12 @@ public class StatisticsFragment extends Fragment {
             endDateTextView.setText(mSimpleDateFormat.format(mEndDate));
             switch (mRadioGroup.getCheckedRadioButtonId()) {
                 case R.id.weekly_button :
-                    if (DataLab.get().retrieveWeeklyData(mStartDate, mEndDate) != null)
-                        mRecyclerView.setAdapter(new StatisticsAdapter(DataLab.get().retrieveWeeklyData(mStartDate, mEndDate)));
+                    if (DataLab.get(getActivity()).retrieveWeeklyData(mStartDate, mEndDate) != null)
+                        mRecyclerView.setAdapter(new StatisticsAdapter(DataLab.get(getActivity()).retrieveWeeklyData(mStartDate, mEndDate)));
                     break;
                 case R.id.monthly_button :
-                    if (DataLab.get().retrieveMontlyData(mStartDate, mEndDate) != null)
-                        mRecyclerView.setAdapter(new StatisticsAdapter(DataLab.get().retrieveMontlyData(mStartDate, mEndDate)));
+                    if (DataLab.get(getActivity()).retrieveMontlyData(mStartDate, mEndDate) != null)
+                        mRecyclerView.setAdapter(new StatisticsAdapter(DataLab.get(getActivity()).retrieveMontlyData(mStartDate, mEndDate)));
                     break;
             }
         }

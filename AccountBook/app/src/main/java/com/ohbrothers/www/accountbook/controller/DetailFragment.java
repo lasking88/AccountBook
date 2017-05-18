@@ -1,9 +1,8 @@
-package com.ohbrothers.www.accountbook;
+package com.ohbrothers.www.accountbook.controller;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -12,18 +11,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecoration.linear.EndOffsetItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecoration.linear.StartOffsetItemDecoration;
+import com.ohbrothers.www.accountbook.R;
 import com.ohbrothers.www.accountbook.model.DataLab;
 import com.ohbrothers.www.accountbook.model.InOutcome;
 import com.ohbrothers.www.accountbook.model.MyDate;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -89,7 +87,7 @@ public class DetailFragment extends Fragment {
     }
 
     private void updateMyDate() {
-        DataLab dataLab = DataLab.get();
+        DataLab dataLab = DataLab.get(getActivity());
         List<InOutcome> dailyInoutcome = dataLab.getData(mSimpleDateFormat.format(mMyDate));
         mMyDate.setInOutcomes(dailyInoutcome);
         int income = 0, outcome = 0, total = 0;

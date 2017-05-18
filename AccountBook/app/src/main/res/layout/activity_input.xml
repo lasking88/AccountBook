@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ohbrothers.www.accountbook.InputActivity">
+    tools:context="com.ohbrothers.www.accountbook.controller.InputActivity">
 
     <TextView
         style="?android:listSeparatorTextViewStyle"

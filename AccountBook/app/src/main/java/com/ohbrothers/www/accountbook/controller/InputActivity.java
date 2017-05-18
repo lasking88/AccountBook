@@ -1,4 +1,4 @@
-package com.ohbrothers.www.accountbook;
+package com.ohbrothers.www.accountbook.controller;
 
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ohbrothers.www.accountbook.R;
 import com.ohbrothers.www.accountbook.model.DataLab;
 import com.ohbrothers.www.accountbook.model.InOutcome;
 
@@ -41,7 +42,7 @@ public class InputActivity extends AppCompatActivity {
         final String date = sdf.format(mDate);
         setTitle(date);
 
-        final DataLab dataLab = DataLab.get();
+        DataLab dataLab = DataLab.get(getApplicationContext());
 
         mInOutcomeList = new ArrayList<>();
         mInOutcomeList = dataLab.getData(date);
@@ -66,6 +67,7 @@ public class InputActivity extends AppCompatActivity {
                         cost = -cost;
                     }
                     InOutcome ioc = new InOutcome(cost, detailInOutcome.getText().toString());
+                    DataLab dataLab = DataLab.get(getApplicationContext());
                     dataLab.addData(date, ioc);
                     finish();
                 }
@@ -79,6 +81,7 @@ public class InputActivity extends AppCompatActivity {
                 if (mSelectedPos == -1) {
                     Toast.makeText(InputActivity.this, "Please choose one income/outcome", Toast.LENGTH_SHORT).show();
                 } else {
+                    DataLab dataLab = DataLab.get(getApplicationContext());
                     dataLab.removeDate(date, mInOutcomeList.get(mSelectedPos));
                     finish();
                 }

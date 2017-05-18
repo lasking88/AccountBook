@@ -1,15 +1,14 @@
-package com.ohbrothers.www.accountbook;
+package com.ohbrothers.www.accountbook.controller;
 
-import android.app.ActionBar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
+
+import com.ohbrothers.www.accountbook.R;
 
 public class MainPagerActivity extends AppCompatActivity {
 

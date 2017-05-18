@@ -1,4 +1,4 @@
-package com.ohbrothers.www.accountbook;
+package com.ohbrothers.www.accountbook.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,9 +15,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration;
+import com.ohbrothers.www.accountbook.R;
 import com.ohbrothers.www.accountbook.model.DataLab;
 import com.ohbrothers.www.accountbook.model.InOutcome;
 import com.ohbrothers.www.accountbook.model.MyDate;
@@ -105,7 +104,7 @@ public class InputFragment extends Fragment {
             } else {
                 date.setCurrentMonth(true);
             }
-            DataLab dataLab = DataLab.get();
+            DataLab dataLab = DataLab.get(getActivity());
             String key = simpleDateFormat.format(millis);
             date.setInOutcomes(dataLab.getData(key));
             mMonth.add(date);
