@@ -11,6 +11,7 @@ import com.ohbrothers.www.accountbook.database.DataBaseHelper;
 import com.ohbrothers.www.accountbook.database.DataCursorWrapper;
 import com.ohbrothers.www.accountbook.database.DbSchema;
 import com.ohbrothers.www.accountbook.database.DbSchema.DataTable;
+import com.ohbrothers.www.accountbook.database.DbSchema.PasscodeTable;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,8 +34,6 @@ public class DataLab {
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
-    private HashMap<String, List<InOutcome>> mStringMyDateHashMap;
-
     public static DataLab get(Context context) {
         if (sDataLab == null) {
             sDataLab = new DataLab(context);
@@ -45,12 +44,58 @@ public class DataLab {
     private DataLab(Context context) {
         mContext = context;
         mDatabase = new DataBaseHelper(mContext).getWritableDatabase();
-        mStringMyDateHashMap = new HashMap<>();
+    }
+
+    public void initialize() {
+        mDatabase.delete(DataTable.NAME, null, null);
+    }
+
+
+    public void setPasscode (String password) {
+        mDatabase.execSQL("update " + PasscodeTable.NAME + " set " +
+                PasscodeTable.Cols.PASSCODE + "=" + password +
+                " where " + PasscodeTable.Cols.PASSCODESWITCH + "=1");
+    }
+
+    public void offPasscode() {
+        mDatabase.execSQL("update " + PasscodeTable.NAME + " set " +
+                PasscodeTable.Cols.PASSCODESWITCH + "=1" +
+                " where " + PasscodeTable.Cols.PASSCODESWITCH + "=0");
+    }
+
+    public void onPasscode() {
+        mDatabase.execSQL("update " + PasscodeTable.NAME + " set " +
+                PasscodeTable.Cols.PASSCODESWITCH + "=0" +
+        " where " + PasscodeTable.Cols.PASSCODESWITCH + "=1");
+    }
+
+    public int getPasscodeSwitch() {
+        DataCursorWrapper cursor = queryData(PasscodeTable.NAME, null, null);
+        int passcodeSwitch;
+        try {
+            cursor.moveToFirst();
+            passcodeSwitch = cursor.getPasscodeSwitch();
+        } finally {
+            cursor.close();
+        }
+        return passcodeSwitch;
+    }
+
+    public String getPasscode() {
+        DataCursorWrapper cursor = queryData(PasscodeTable.NAME, null, null);
+        String rt = "";
+        try {
+            cursor.moveToFirst();
+            rt = cursor.getPasscode();
+        } finally {
+            cursor.close();
+        }
+        return rt;
     }
 
     public void addData(String key, InOutcome ioc) {
         ContentValues values = getContentValues(key, ioc);
-        mDatabase.insert(DbSchema.DataTable.NAME, null, values);
+        mDatabase.insert(DataTable.NAME, null, values);
     }
 
     public void removeDate(String key, InOutcome ioc) {
@@ -64,7 +109,7 @@ public class DataLab {
     public List<InOutcome> getData(String key) {
         List<InOutcome> inOutcomes = new ArrayList<>();
         String[] args = {key};
-        DataCursorWrapper cursor = queryData(DataTable.Cols.DATE + "=?", args);
+        DataCursorWrapper cursor = queryData(DataTable.NAME, DataTable.Cols.DATE + "=?", args);
 
         try {
             cursor.moveToFirst();
@@ -78,6 +123,7 @@ public class DataLab {
         }
 
         Log.d("DATA: ", inOutcomes.size() + "");
+        if (inOutcomes.size() == 0) return null;
         return inOutcomes;
     }
 
@@ -167,9 +213,16 @@ public class DataLab {
         return values;
     }
 
-    private DataCursorWrapper queryData (String whereClause, String[] whereArg) {
+    private static ContentValues getPasscodeValues (int passcodeSwitch, String passcode) {
+        ContentValues values = new ContentValues();
+        values.put(PasscodeTable.Cols.PASSCODESWITCH, passcodeSwitch);
+        values.put(PasscodeTable.Cols.PASSCODE, passcode);
+        return values;
+    }
+
+    private DataCursorWrapper queryData (String database, String whereClause, String[] whereArg) {
         Cursor cursor = mDatabase.query(
-                DataTable.NAME,
+                database,
                 null,
                 whereClause,
                 whereArg,

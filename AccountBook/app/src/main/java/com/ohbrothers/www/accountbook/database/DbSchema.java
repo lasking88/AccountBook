@@ -14,4 +14,13 @@ public class DbSchema {
             public static final String INOUTCOME = "inoutcome";
         }
     }
+
+    public static final class PasscodeTable {
+        public static final String NAME = "passcode";
+
+        public static final class Cols {
+            public static final String PASSCODESWITCH = "switch";
+            public static final String PASSCODE = "passcode";
+        }
+    }
 }

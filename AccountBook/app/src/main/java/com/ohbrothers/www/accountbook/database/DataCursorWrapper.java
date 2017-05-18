@@ -30,4 +30,14 @@ public class DataCursorWrapper extends CursorWrapper {
 
         return data;
     }
+
+    public int getPasscodeSwitch() {
+        int onOff = getInt(getColumnIndex(DbSchema.PasscodeTable.Cols.PASSCODESWITCH));
+        return onOff;
+    }
+
+    public String getPasscode() {
+        String password = getString(getColumnIndex(DbSchema.PasscodeTable.Cols.PASSCODE));
+        return password;
+    }
 }
