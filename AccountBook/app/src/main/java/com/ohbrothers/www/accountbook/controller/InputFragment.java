@@ -104,7 +104,7 @@ public class InputFragment extends Fragment {
             } else {
                 date.setCurrentMonth(true);
             }
-            DataLab dataLab = DataLab.get(getActivity());
+            DataLab dataLab = DataLab.get(getActivity().getApplicationContext());
             String key = simpleDateFormat.format(millis);
             date.setInOutcomes(dataLab.getData(key));
             mMonth.add(date);

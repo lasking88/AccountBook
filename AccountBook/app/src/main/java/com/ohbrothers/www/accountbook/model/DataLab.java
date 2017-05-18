@@ -4,11 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.util.Pair;
 
 import com.ohbrothers.www.accountbook.database.DataBaseHelper;
 import com.ohbrothers.www.accountbook.database.DataCursorWrapper;
 import com.ohbrothers.www.accountbook.database.DbSchema;
+import com.ohbrothers.www.accountbook.database.DbSchema.DataTable;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,61 +43,46 @@ public class DataLab {
     }
 
     private DataLab(Context context) {
-        mContext = context.getApplicationContext();
+        mContext = context;
         mDatabase = new DataBaseHelper(mContext).getWritableDatabase();
         mStringMyDateHashMap = new HashMap<>();
+    }
 
-        DataCursorWrapper cursor = queryData(null, null);
+    public void addData(String key, InOutcome ioc) {
+        ContentValues values = getContentValues(key, ioc);
+        mDatabase.insert(DbSchema.DataTable.NAME, null, values);
+    }
+
+    public void removeDate(String key, InOutcome ioc) {
+        mDatabase.delete(DataTable.NAME,
+                DataTable.Cols.DATE + "='" + key + "' AND "
+                + DataTable.Cols.DETAIL + "='" + ioc.getDetail() + "' AND "
+                + DataTable.Cols.INOUTCOME + "=" + ioc.getInOutcome()
+                , null);
+    }
+
+    public List<InOutcome> getData(String key) {
+        List<InOutcome> inOutcomes = new ArrayList<>();
+        String[] args = {key};
+        DataCursorWrapper cursor = queryData(DataTable.Cols.DATE + "=?", args);
 
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                Pair<String, InOutcome> tmp = cursor.getInOutcome();
-                addData(tmp.first, tmp.second);
+                inOutcomes.add(cursor.getInOutcome().second);
+                Log.d("Data: ", key + "="+cursor.getInOutcome().first + inOutcomes.get(0).getDetail() + inOutcomes.get(0).getInOutcome());
+                cursor.moveToNext();
             }
         } finally {
             cursor.close();
         }
-    }
 
-    public void addData(String key, InOutcome ioc) {
-        if (mStringMyDateHashMap.get(key) == null) {
-            List<InOutcome> inOutcomes = new ArrayList<>();
-            inOutcomes.add(ioc);
-            mStringMyDateHashMap.put(key, inOutcomes);
-        } else {
-            mStringMyDateHashMap.get(key).add(ioc);
-        }
-//        ContentValues values = getContentValues(key, ioc);
-//        mDatabase.insert(DbSchema.DataTable.NAME, null, values);
-    }
-
-    public void removeDate(String key, InOutcome ioc) {
-        List<InOutcome> inOutcomes = mStringMyDateHashMap.get(key);
-        if (inOutcomes != null) {
-            inOutcomes.remove(ioc);
-        }
-    }
-
-    public List<InOutcome> getData(String key) {
-//        List<InOutcome> inOutcomes = new ArrayList<>();
-//        DataCursorWrapper cursor = queryData(null, null);
-//
-//        try {
-//            cursor.moveToFirst();
-//            while (!cursor.isAfterLast()) {
-//                inOutcomes.add(cursor.getInOutcome().second);
-//                cursor.moveToNext();
-//            }
-//        } finally {
-//            cursor.close();
-//        }
-//        return inOutcomes;
-        return mStringMyDateHashMap.get(key);
+        Log.d("DATA: ", inOutcomes.size() + "");
+        return inOutcomes;
     }
 
     private List<Integer> dailyStatistics(String key) {
-        List<InOutcome> inOutcomes = mStringMyDateHashMap.get(key);
+        List<InOutcome> inOutcomes = getData(key);
         if (inOutcomes == null) return null;
         int income = 0;
         int outcome = 0;
@@ -174,15 +161,15 @@ public class DataLab {
 
     private static ContentValues getContentValues(String date, InOutcome inOutCome) {
         ContentValues values = new ContentValues();
-        values.put(DbSchema.DataTable.Cols.DATE, date);
-        values.put(DbSchema.DataTable.Cols.DETAIL, inOutCome.getDetail());
-        values.put(DbSchema.DataTable.Cols.INOUTCOME, inOutCome.getInOutcome());
+        values.put(DataTable.Cols.DATE, date);
+        values.put(DataTable.Cols.DETAIL, inOutCome.getDetail());
+        values.put(DataTable.Cols.INOUTCOME, inOutCome.getInOutcome());
         return values;
     }
 
     private DataCursorWrapper queryData (String whereClause, String[] whereArg) {
         Cursor cursor = mDatabase.query(
-                DbSchema.DataTable.NAME,
+                DataTable.NAME,
                 null,
                 whereClause,
                 whereArg,

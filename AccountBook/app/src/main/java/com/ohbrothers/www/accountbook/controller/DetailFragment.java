@@ -32,6 +32,7 @@ import java.util.List;
 public class DetailFragment extends Fragment {
 
     private static final String DIALOG_DATE = "DialogDate";
+    private static final String KEY_DATE = "deyDate";
     private static final int REQUEST_DATE = 0;
 
     private TextView mDateTextView;
@@ -47,7 +48,16 @@ public class DetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         long currentTimeMillis = System.currentTimeMillis();
-        mMyDate = new MyDate(currentTimeMillis);
+        if (savedInstanceState == null)
+            mMyDate = new MyDate(currentTimeMillis);
+        else
+            mMyDate = (MyDate)savedInstanceState.getSerializable(KEY_DATE);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(KEY_DATE, mMyDate);
     }
 
     @Override
@@ -87,7 +97,7 @@ public class DetailFragment extends Fragment {
     }
 
     private void updateMyDate() {
-        DataLab dataLab = DataLab.get(getActivity());
+        DataLab dataLab = DataLab.get(getActivity().getApplicationContext());
         List<InOutcome> dailyInoutcome = dataLab.getData(mSimpleDateFormat.format(mMyDate));
         mMyDate.setInOutcomes(dailyInoutcome);
         int income = 0, outcome = 0, total = 0;
