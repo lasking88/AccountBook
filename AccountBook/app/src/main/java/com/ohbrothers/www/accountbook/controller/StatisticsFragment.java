@@ -31,8 +31,8 @@ import java.util.List;
 public class StatisticsFragment extends Fragment {
 
     private static final String DIALOG_DATE = "DialogDate";
-    private static final String ARG_STATISTICS_START_DATE = "startdate";
-    private static final String ARG_STATISTICS_END_DATE = "enddate";
+    private static final String START_DATE_KEY = "startdate";
+    private static final String END_DATE_KEY = "enddate";
     private static final int REQUEST_START_DATE = 0;
     private static final int REQUEST_END_DATE = 1;
 
@@ -56,16 +56,16 @@ public class StatisticsFragment extends Fragment {
             mStartDate = new Date(currentTimeMillis);
             mEndDate = new Date(currentTimeMillis);
         } else {
-            mStartDate = (Date)savedInstanceState.getSerializable(ARG_STATISTICS_START_DATE);
-            mEndDate = (Date)savedInstanceState.getSerializable(ARG_STATISTICS_END_DATE);
+            mStartDate = (Date)savedInstanceState.getSerializable(START_DATE_KEY);
+            mEndDate = (Date)savedInstanceState.getSerializable(END_DATE_KEY);
         }
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(ARG_STATISTICS_START_DATE, mStartDate);
-        outState.putSerializable(ARG_STATISTICS_END_DATE, mEndDate);
+        outState.putSerializable(START_DATE_KEY, mStartDate);
+        outState.putSerializable(END_DATE_KEY, mEndDate);
     }
 
     @Override

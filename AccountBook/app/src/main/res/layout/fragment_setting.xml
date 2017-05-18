@@ -5,7 +5,7 @@
               android:layout_height="match_parent">
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/passcode_switch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -18,6 +18,21 @@
         android:src="@drawable/horizontaldivider"/>
 
     <TextView
+        android:id="@+id/change_passcode_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="32sp"
+        android:textColor="#000000"
+        android:text="Change Password"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/horizontaldivider"/>
+
+    <TextView
+        android:id="@+id/init_database"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -31,6 +46,7 @@
         android:src="@drawable/horizontaldivider"/>
 
     <TextView
+        android:id="@+id/backup_database"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
