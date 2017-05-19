@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.ohbrothers.www.accountbook"
-        minSdkVersion 19
+        minSdkVersion 23
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -17,6 +17,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
@@ -27,7 +29,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.0.0'
     compile 'com.bignerdranch.android:simple-item-decoration:1.0.0'
+    compile 'com.google.android.gms:play-services-vision:9.4.0+'
+    compile 'com.google.android.gms:play-services:10.2.6'
     testCompile 'junit:junit:4.12'
 }
