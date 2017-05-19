@@ -19,8 +19,8 @@ public class MainPagerActivity extends AppCompatActivity {
             new InputFragment(),
             new DetailFragment(),
             new StatisticsFragment(),
-            new ReceiptFragment(),
-            new SettingFragment()
+            new SettingFragment(),
+            new ReceiptFragment()
     };
 
     @Override

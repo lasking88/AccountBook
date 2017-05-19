@@ -3,6 +3,6 @@
     <string name="tab0">Input</string>
     <string name="tab1">Details</string>
     <string name="tab2">Statistics</string>
-    <string name="tab3">Receipt</string>
-    <string name="tab4">Setting</string>
+    <string name="tab3">Setting</string>
+    <string name="tab4">Receipt</string>
 </resources>

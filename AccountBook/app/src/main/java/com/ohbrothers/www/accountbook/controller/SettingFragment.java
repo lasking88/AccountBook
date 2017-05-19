@@ -83,34 +83,13 @@ public class SettingFragment extends Fragment {
         backupDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String DATABASE_NAME = "dataBase.db";
-                String databasePath = getActivity().getDatabasePath(DATABASE_NAME).getPath();
-                String inFileName = databasePath;
-                try {
-                    File dbFile = new File(inFileName);
-                    FileInputStream fis = new FileInputStream(dbFile);
-
-                    String outFileName = Environment.getExternalStorageDirectory() + "/" + DATABASE_NAME;
-
-                    OutputStream output = new FileOutputStream(outFileName);
-
-                    byte[] buffer = new byte[1024];
-                    int length;
-                    while ((length = fis.read(buffer)) > 0) {
-                        output.write(buffer, 0, length);
-                    }
-                    //Close the streams
-                    output.flush();
-                    output.close();
-                    fis.close();
-                    Toast.makeText(getActivity(), "Backup is done", Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    Toast.makeText(getActivity(), "Backup is failed", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
+                Intent newIntent = new Intent(SettingFragment.this.getActivity(), BackupActivity.class);
+                startActivity(newIntent);
             }
         });
 
         return view;
     }
+
+
 }
