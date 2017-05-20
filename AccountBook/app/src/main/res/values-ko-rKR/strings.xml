@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">가계부</string>
+    <string name="tab0">입력</string>
+    <string name="tab1">세부사항</string>
+    <string name="tab2">통계</string>
+    <string name="tab3">영수증</string>
+    <string name="tab4">설정</string>
+
+    <!-- ocr strings -->
+    <string name="ok">확인</string>
+    <string name="permission_camera_rationale">카메라 기능에 접근합니다.</string>
+    <string name="no_camera_permission">카메라에 접근 할 수 없습니다.</string>
+    <string name="low_storage_error">용량이 부족하여 ORC Dependencies를 다운 받을 수 없습니다.</string>
+    <string name="ocr_header">요영수증 불러오기 버튼을 누르세</string>
+    <string name="read_text">영수증 불러오기</string>
+    <string name="auto_focus">자동초점</string>
+    <string name="use_flash">플래쉬</string>
+    <string name="ocr_success">입력에 성공 하였습니다</string>
+    <string name="ocr_failure">텍스트가 존재하지 않습니다</string>
+    <string name="ocr_error">"읽기 에러: %1$s"</string>
+
+    <string name="confirm_password">비밀번호 확인</string>
+    <string name="new_password">새 비밀번호</string>
+    <string name="o_k">확 인</string>
+    <string name="add">추가</string>
+    <string name="cost">가격</string>
+    <string name="detail">세부사항</string>
+    <string name="income">수입</string>
+    <string name="outcome">지출</string>
+    <string name="remove">삭제</string>
+    <string name="type_in_cost_of_income_outcome">수입/지출 값을 입력하세요</string>
+    <string name="type_in_details_of_income_outcome">수입/지출 내용을 입력하세요</string>
+    <string name="type_in_your_passcode">비밀번호를 입력하세요</string>
+    <string name="default_password_is_0000">초기 비밀번호는 0000입니다</string>
+    <string name="total">합계</string>
+    <string name="fri">금</string>
+    <string name="mon">월</string>
+    <string name="sat">토</string>
+    <string name="sun">일</string>
+    <string name="thu">목</string>
+    <string name="tue">화</string>
+    <string name="wed">수</string>
+    <string name="confirm">확인</string>
+    <string name="change_password">비밀번호 변경</string>
+    <string name="database_backup">데이터베이스 백업</string>
+    <string name="initialize_database">데이터베이스 초기화</string>
+    <string name="lock">잠금기능</string>
+    <string name="fromto">~</string>
+    <string name="monthly">달 별</string>
+    <string name="weekly">주 별</string>
+    <string name="password_is_changed">비밀번호가 변경되었습니다.</string>
+    <string name="password_is_not_matched">비밀번호가 틀렸습니다. 뒤로 가시려면, Back버튼을 눌러주세요.</string>
+    <string name="choose_a_date">날짜를 고르세요</string>
+    <string name="fill_in_the_blank">빈 칸을 채우세요</string>
+    <string name="check_inoutcome">수입 또는 지출을 체크하세요</string>
+    <string name="choose_one_of_inoutcome">수입/지출 중 하나를 선택하세요</string>
+    <string name="wrong_password">비밀번호가 틀렸습니다. 다시 시도하세요.</string>
+    <string name="database_is_clear">데이터베이스가 초기화되었습니다.</string>
+    <string name="tap_to_capture">탭 하시면 글자가 추출됩니다. 확대/축소가 가능합니다.</string>
+</resources>

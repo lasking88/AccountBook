@@ -58,9 +58,9 @@ public class InputActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (detailInOutcome == null || costInOutcome == null) {
-                    Toast.makeText(InputActivity.this, "Please fill in the black", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InputActivity.this, R.string.fill_in_the_blank, Toast.LENGTH_SHORT).show();
                 } else if (radioGroup.getCheckedRadioButtonId() == -1) {
-                    Toast.makeText(InputActivity.this, "Please check income or outcome", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InputActivity.this, R.string.check_inoutcome, Toast.LENGTH_SHORT).show();
                 } else {
                     int cost = Integer.parseInt(costInOutcome.getText().toString());
                     if (radioButtonOutcome.isChecked()) {
@@ -79,7 +79,7 @@ public class InputActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mSelectedPos == -1) {
-                    Toast.makeText(InputActivity.this, "Please choose one income/outcome", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InputActivity.this, R.string.choose_one_of_inoutcome, Toast.LENGTH_SHORT).show();
                 } else {
                     DataLab dataLab = DataLab.get(getApplicationContext());
                     dataLab.removeDate(date, mInOutcomeList.get(mSelectedPos));

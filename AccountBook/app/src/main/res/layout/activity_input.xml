@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Detail"/>
+        android:text="@string/detail"/>
 
     <EditText
         android:id="@+id/inoutcome_detail_edit_text"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:hint="Type in details of income/outcome"/>
+        android:hint="@string/type_in_details_of_income_outcome"/>
 
     <TextView
         style="?android:listSeparatorTextViewStyle"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Cost"/>
+        android:text="@string/cost"/>
 
     <EditText
         android:id="@+id/inoutcome_cost_edit_text"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:hint="Type in cost of income/outcome"
+        android:hint="@string/type_in_cost_of_income_outcome"
         android:inputType="number"
         android:maxLines="1"/>
 
@@ -55,14 +55,14 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Income"/>
+            android:text="@string/income"/>
 
         <RadioButton
             android:id="@+id/outcome_radio_button"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Outcome"/>
+            android:text="@string/outcome"/>
 
     </RadioGroup>
 
@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="ADD"/>
+        android:text="@string/add"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/inoutcome_daily_recycler_view"
@@ -86,6 +86,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Remove"/>
+        android:text="@string/remove"/>
 
 </LinearLayout>

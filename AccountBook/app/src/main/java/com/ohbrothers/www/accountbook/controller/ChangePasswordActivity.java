@@ -28,10 +28,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 if (password.equals(confirmPassword.getText().toString())) {
                     DataLab dataLab = DataLab.get(getApplicationContext());
                     dataLab.setPasscode(password);
-                    Toast.makeText(getApplicationContext(), "Password is changed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.password_is_changed, Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Passwords are not matched. If you want to go back, please press back button.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.password_is_not_matched, Toast.LENGTH_SHORT).show();
                 }
             }
         });

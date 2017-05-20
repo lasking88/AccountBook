@@ -75,7 +75,7 @@ public class SettingFragment extends Fragment {
             public void onClick(View v) {
                 DataLab dataLab = DataLab.get(getActivity().getApplicationContext());
                 dataLab.initialize();
-                Toast.makeText(getActivity(), "Database is clear", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.database_is_clear, Toast.LENGTH_SHORT).show();
             }
         });
 

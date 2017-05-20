@@ -38,7 +38,7 @@ public class LockActivity extends AppCompatActivity {
                     startActivity(newIntent);
                     finish();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Wrong password! Try again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.wrong_password, Toast.LENGTH_SHORT).show();
                 }
             }
         });
