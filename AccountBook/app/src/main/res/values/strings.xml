@@ -58,4 +58,8 @@
     <string name="wrong_password">Wrong password! Try again</string>
     <string name="database_is_clear">Database is clear</string>
     <string name="tap_to_capture">Tap to capture. Pinch/Stretch to zoom</string>
+    <string name="unit">EUR</string>
+    <string name="added_a_inoutcome">Added a income/outcome</string>
+    <string name="cannot_add_inoutcome">cannot add income/outcome</string>
+    <string name="extract_condition">[Web발신]</string>
 </resources>

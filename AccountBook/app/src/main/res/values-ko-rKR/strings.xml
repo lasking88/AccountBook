@@ -12,7 +12,7 @@
     <string name="permission_camera_rationale">카메라 기능에 접근합니다.</string>
     <string name="no_camera_permission">카메라에 접근 할 수 없습니다.</string>
     <string name="low_storage_error">용량이 부족하여 ORC Dependencies를 다운 받을 수 없습니다.</string>
-    <string name="ocr_header">요영수증 불러오기 버튼을 누르세</string>
+    <string name="ocr_header">영수증 불러오기 버튼을 누르세요</string>
     <string name="read_text">영수증 불러오기</string>
     <string name="auto_focus">자동초점</string>
     <string name="use_flash">플래쉬</string>
@@ -58,4 +58,8 @@
     <string name="wrong_password">비밀번호가 틀렸습니다. 다시 시도하세요.</string>
     <string name="database_is_clear">데이터베이스가 초기화되었습니다.</string>
     <string name="tap_to_capture">탭 하시면 글자가 추출됩니다. 확대/축소가 가능합니다.</string>
+    <string name="unit">원</string>
+    <string name="added_a_inoutcome">수입/지출이 등록되었습니다</string>
+    <string name="cannot_add_inoutcome">수입/지출 등록에 실패하였습니다</string>
+    <string name="extract_condition">[Web발신]</string>
 </resources>
