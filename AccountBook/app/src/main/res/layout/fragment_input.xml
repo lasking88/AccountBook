@@ -44,43 +44,43 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="mon"/>
+            android:text="@string/mon"/>
         <TextView
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="tue"/>
+            android:text="@string/tue"/>
         <TextView
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="wed"/>
+            android:text="@string/wed"/>
         <TextView
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="thu"/>
+            android:text="@string/thu"/>
         <TextView
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="fri"/>
+            android:text="@string/fri"/>
         <TextView
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="sat"/>
+            android:text="@string/sat"/>
         <TextView
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="sun"/>
+            android:text="@string/sun"/>
 
     </LinearLayout>
 

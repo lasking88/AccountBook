@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
-            android:text="WEEKLY"/>
+            android:text="@string/weekly"/>
 
         <RadioButton
             android:id="@+id/monthly_button"
@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="MONTHLY"/>
+            android:text="@string/monthly"/>
 
     </RadioGroup>
 
@@ -54,7 +54,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" ~ "
+            android:text="@string/fromto"
             android:textSize="16sp"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"/>
@@ -82,7 +82,7 @@
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:gravity="center"
-            android:text="Income"/>
+            android:text="@string/income"/>
 
         <TextView
             android:id="@+id/statistics_item_outcome_text_view"
@@ -91,7 +91,7 @@
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:gravity="center"
-            android:text="Outcome"/>
+            android:text="@string/outcome"/>
 
         <TextView
             android:id="@+id/statistics_item_total_text_view"
@@ -100,7 +100,7 @@
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:gravity="center"
-            android:text="Total"/>
+            android:text="@string/total"/>
 
     </LinearLayout>
     <ImageView

@@ -3,8 +3,8 @@
     <string name="tab0">Input</string>
     <string name="tab1">Details</string>
     <string name="tab2">Statistics</string>
-    <string name="tab3">Setting</string>
-    <string name="tab4">Receipt</string>
+    <string name="tab3">Receipt</string>
+    <string name="tab4">Setting</string>
 
     <!-- ocr strings -->
     <string name="ok">OK</string>
@@ -12,11 +12,54 @@
     <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
     <string name="low_storage_error">Ocr dependencies cannot be downloaded due to low device storage</string>
     <string name="title_activity_main">Ocr Detector Sample</string>
-    <string name="ocr_header">Click &quot;Detect Text&quot; to detect text</string>
-    <string name="read_text">Detect Text</string>
+    <string name="ocr_header">Click Detect Text to detect text</string>
+    <string name="read_text">Detect Receipt</string>
     <string name="auto_focus">Auto Focus</string>
     <string name="use_flash">Use Flash</string>
     <string name="ocr_success">Text read successfully</string>
     <string name="ocr_failure">No text captured</string>
     <string name="ocr_error">"Error reading text: %1$s"</string>
+
+    <string name="confirm_password">Confirm Password</string>
+    <string name="new_password">New Password</string>
+    <string name="o_k">O K</string>
+    <string name="add">ADD</string>
+    <string name="cost">Cost</string>
+    <string name="detail">Detail</string>
+    <string name="income">Income</string>
+    <string name="outcome">Outcome</string>
+    <string name="remove">Remove</string>
+    <string name="type_in_cost_of_income_outcome">Type in cost of income/outcome</string>
+    <string name="type_in_details_of_income_outcome">Type in details of income/outcome</string>
+    <string name="type_in_your_passcode">Type in your passcode</string>
+    <string name="default_password_is_0000">default password is 0000</string>
+    <string name="total">Total</string>
+    <string name="fri">fri</string>
+    <string name="mon">mon</string>
+    <string name="sat">sat</string>
+    <string name="sun">sun</string>
+    <string name="thu">thu</string>
+    <string name="tue">tue</string>
+    <string name="wed">wed</string>
+    <string name="confirm">confirm</string>
+    <string name="change_password">Change Password</string>
+    <string name="database_backup">Database Backup</string>
+    <string name="initialize_database">Initialize Database</string>
+    <string name="lock">Lock</string>
+    <string name="fromto">~</string>
+    <string name="monthly">MONTHLY</string>
+    <string name="weekly">WEEKLY</string>
+    <string name="password_is_changed">Password is changed</string>
+    <string name="password_is_not_matched">Passwords are not matched. If you want to go back, please press back button.</string>
+    <string name="choose_a_date">Choose a date</string>
+    <string name="fill_in_the_blank">Please fill in the black</string>
+    <string name="check_inoutcome">Please check income or outcome</string>
+    <string name="choose_one_of_inoutcome">Please choose one income/outcome</string>
+    <string name="wrong_password">Wrong password! Try again</string>
+    <string name="database_is_clear">Database is clear</string>
+    <string name="tap_to_capture">Tap to capture. Pinch/Stretch to zoom</string>
+    <string name="unit">EUR</string>
+    <string name="added_a_inoutcome">Added a income/outcome</string>
+    <string name="cannot_add_inoutcome">cannot add income/outcome</string>
+    <string name="extract_condition">[Web발신]</string>
 </resources>

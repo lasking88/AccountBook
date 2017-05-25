@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Type in your passcode"
+        android:text="@string/type_in_your_passcode"
         android:textColor="@android:color/black"
         android:textSize="28sp"/>
 
@@ -36,13 +36,13 @@
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:background="@color/colorPrimary"
-        android:text="O K"/>
+        android:text="@string/o_k"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="32dp"
-        android:text="default password is 0000"/>
+        android:text="@string/default_password_is_0000"/>
 
 </LinearLayout>

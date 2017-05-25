@@ -33,7 +33,7 @@ public class DetailFragment extends Fragment {
 
     private static final String DIALOG_DATE = "DialogDate";
     private static final String KEY_DATE = "deyDate";
-    private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_DATE = 8999;
 
     private TextView mDateTextView;
     private TextView mTotalTextView;
