@@ -31,6 +31,13 @@ public class InputActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private int mSelectedPos = -1;
     private View mPreviousView;
+    private EditText mDetailInOutcome;
+    private EditText mCostInOutcome;
+    private Button mAddButton;
+    private RadioGroup mRadioGroup;
+    private RadioButton mRadioButtonIncome;
+    private RadioButton mRadioButtonOutcome;
+    private SimpleDateFormat mSdf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +45,8 @@ public class InputActivity extends AppCompatActivity {
         setContentView(R.layout.activity_input);
 
         mDate = (Date)getIntent().getExtras().get(InputFragment.EXTRA_DATE);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        final String date = sdf.format(mDate);
+        mSdf = new SimpleDateFormat("yyyy-MM-dd");
+        final String date = mSdf.format(mDate);
         setTitle(date);
 
         DataLab dataLab = DataLab.get(getApplicationContext());
@@ -47,26 +54,33 @@ public class InputActivity extends AppCompatActivity {
         mInOutcomeList = new ArrayList<>();
         mInOutcomeList = dataLab.getData(date);
 
-        final RadioGroup radioGroup = (RadioGroup)findViewById(R.id.radio_group_inoutcome);
-        final RadioButton radioButtonIncome = (RadioButton)findViewById(R.id.income_radio_button);
-        final RadioButton radioButtonOutcome = (RadioButton)findViewById(R.id.outcome_radio_button);
-        final EditText detailInOutcome = (EditText)findViewById(R.id.inoutcome_detail_edit_text);
-        final EditText costInOutcome = (EditText)findViewById(R.id.inoutcome_cost_edit_text);
+        mRadioGroup = (RadioGroup)findViewById(R.id.radio_group_inoutcome);
+        mRadioButtonIncome = (RadioButton)findViewById(R.id.income_radio_button);
+        mRadioButtonOutcome = (RadioButton)findViewById(R.id.outcome_radio_button);
+        mDetailInOutcome = (EditText)findViewById(R.id.inoutcome_detail_edit_text);
+        mCostInOutcome = (EditText)findViewById(R.id.inoutcome_cost_edit_text);
 
-        Button addButton = (Button)findViewById(R.id.add_button);
-        addButton.setOnClickListener(new View.OnClickListener() {
+        String inoutcome = (String)getIntent().getExtras().get(ReceiptFragment.EXTRA_INOUTCOME);
+        if (inoutcome != null) {
+            mRadioButtonIncome.setChecked(false);
+            mRadioButtonOutcome.setChecked(true);
+            mCostInOutcome.setText(inoutcome);
+        }
+
+        mAddButton = (Button)findViewById(R.id.add_button);
+        mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (detailInOutcome == null || costInOutcome == null) {
+                if (mDetailInOutcome == null || mCostInOutcome == null) {
                     Toast.makeText(InputActivity.this, R.string.fill_in_the_blank, Toast.LENGTH_SHORT).show();
-                } else if (radioGroup.getCheckedRadioButtonId() == -1) {
+                } else if (mRadioGroup.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(InputActivity.this, R.string.check_inoutcome, Toast.LENGTH_SHORT).show();
                 } else {
-                    int cost = Integer.parseInt(costInOutcome.getText().toString());
-                    if (radioButtonOutcome.isChecked()) {
+                    int cost = Integer.parseInt(mCostInOutcome.getText().toString());
+                    if (mRadioButtonOutcome.isChecked()) {
                         cost = -cost;
                     }
-                    InOutcome ioc = new InOutcome(cost, detailInOutcome.getText().toString());
+                    InOutcome ioc = new InOutcome(cost, mDetailInOutcome.getText().toString());
                     DataLab dataLab = DataLab.get(getApplicationContext());
                     dataLab.addData(date, ioc);
                     finish();
@@ -134,6 +148,40 @@ public class InputActivity extends AppCompatActivity {
             mSelectedPos = mPosition;
             v.setBackgroundColor(ContextCompat.getColor(InputActivity.this, R.color.colorGray));
             mPreviousView = v;
+            mDetailInOutcome.setText(mInOutcome.getDetail());
+            int value = mInOutcome.getInOutcome();
+            if (value > 0) {
+                mRadioButtonIncome.setChecked(true);
+                mRadioButtonOutcome.setChecked(false);
+                mCostInOutcome.setText(value + "");
+            } else {
+                mRadioButtonIncome.setChecked(false);
+                mRadioButtonOutcome.setChecked(true);
+                mCostInOutcome.setText(-value + "");
+            }
+
+            mAddButton.setText("EDIT");
+            mAddButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DataLab dataLab = DataLab.get(getApplicationContext());
+                    String date = mSdf.format(mDate);
+                    dataLab.removeDate(date, mInOutcomeList.get(mSelectedPos));
+                    if (mDetailInOutcome == null || mCostInOutcome == null) {
+                        Toast.makeText(InputActivity.this, R.string.fill_in_the_blank, Toast.LENGTH_SHORT).show();
+                    } else if (mRadioGroup.getCheckedRadioButtonId() == -1) {
+                        Toast.makeText(InputActivity.this, R.string.check_inoutcome, Toast.LENGTH_SHORT).show();
+                    } else {
+                        int cost = Integer.parseInt(mCostInOutcome.getText().toString());
+                        if (mRadioButtonOutcome.isChecked()) {
+                            cost = -cost;
+                        }
+                        InOutcome ioc = new InOutcome(cost, mDetailInOutcome.getText().toString());
+                        dataLab.addData(date, ioc);
+                        finish();
+                    }
+                }
+            });
         }
     }
 
