@@ -40,6 +40,7 @@ public class ReceiptFragment extends Fragment implements View.OnClickListener{
     private static final int REQUEST_DATE = 9004;
     private static final String DIALOG_DATE = "DialogDate";
     private static final String KEY_DATE = "deyDate";
+    public static final String EXTRA_INOUTCOME = "com.ohbrothers.www.acountbook.inoutcome";
     private static final String TAG = "ReceiptFragment";
 
     @Override
@@ -98,7 +99,15 @@ public class ReceiptFragment extends Fragment implements View.OnClickListener{
 
             startActivityForResult(intent, RC_OCR_CAPTURE);
         } else if (v.getId() == R.id.confirm_text) {
-
+            String string = mTextValue.getText().toString();
+            String inoutcome = "";
+            for (int i = 0; i < string.length(); ++i) {
+                if (Character.isDigit(string.charAt(i))) inoutcome += string.charAt(i);
+            }
+            Intent intent = new Intent(getActivity(), InputActivity.class);
+            intent.putExtra(InputFragment.EXTRA_DATE, mMyDate);
+            intent.putExtra(EXTRA_INOUTCOME, inoutcome);
+            startActivity(intent);
         }
     }
 
