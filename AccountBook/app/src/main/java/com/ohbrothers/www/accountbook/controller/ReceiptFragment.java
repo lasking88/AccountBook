@@ -82,8 +82,8 @@ public class ReceiptFragment extends Fragment implements View.OnClickListener{
         mAutoFocus = (CompoundButton) view.findViewById(R.id.auto_focus);
         mUseFlash = (CompoundButton) view.findViewById(R.id.use_flash);
 
-        view.findViewById(R.id.confirm_text).setOnClickListener(this);
-        mConfirmButton = (Button)view.findViewById(R.id.read_text);
+        view.findViewById(R.id.read_text).setOnClickListener(this);
+        mConfirmButton = (Button)view.findViewById(R.id.confirm_text);
         mConfirmButton.setOnClickListener(this);
 
         return view;
