@@ -62,7 +62,7 @@ public class SMSReceiver extends BroadcastReceiver {
         long currentTimeMillis = System.currentTimeMillis();
         String key = sdf.format(new Date(currentTimeMillis));
         if (cost != "") {
-            InOutcome ioc = new InOutcome(Integer.valueOf(cost), parts.get(parts.size()-1));
+            InOutcome ioc = new InOutcome(-Integer.valueOf(cost), parts.get(parts.size()-1));
             DataLab.get(mContext).addData(key, ioc);
             Toast.makeText(mContext, R.string.added_a_inoutcome, Toast.LENGTH_SHORT).show();
         } else {
