@@ -62,4 +62,6 @@
     <string name="added_a_inoutcome">수입/지출이 등록되었습니다</string>
     <string name="cannot_add_inoutcome">수입/지출 등록에 실패하였습니다</string>
     <string name="extract_condition">[Web발신]</string>
+    <string name="income_checker">입</string>
+    <string name="outcome_checker">출</string>
 </resources>

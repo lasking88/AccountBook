@@ -33,13 +33,13 @@
     <string name="type_in_your_passcode">Type in your passcode</string>
     <string name="default_password_is_0000">default password is 0000</string>
     <string name="total">Total</string>
-    <string name="fri">fri</string>
-    <string name="mon">mon</string>
-    <string name="sat">sat</string>
-    <string name="sun">sun</string>
-    <string name="thu">thu</string>
-    <string name="tue">tue</string>
-    <string name="wed">wed</string>
+    <string name="fri">Fri</string>
+    <string name="mon">Mon</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+    <string name="thu">Thu</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
     <string name="confirm">confirm</string>
     <string name="change_password">Change Password</string>
     <string name="database_backup">Database Backup</string>
@@ -60,5 +60,7 @@
     <string name="unit">EUR</string>
     <string name="added_a_inoutcome">Added a income/outcome</string>
     <string name="cannot_add_inoutcome">cannot add income/outcome</string>
-    <string name="extract_condition">[Web발신]</string>
+    <string name="extract_condition">Web</string>
+    <string name="income_checker">I</string>
+    <string name="outcome_checker">O</string>
 </resources>

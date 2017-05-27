@@ -49,26 +49,27 @@ public class SMSReceiver extends BroadcastReceiver {
     }
 
     private void parsingSMS(String text) {
-        List<String> parts = Arrays.asList(text.split("\n"));
+        List<String> parts = Arrays.asList(text.split("\\s+"));
 
         String cost = "";
         for(int i = 0; i < parts.size()-1; ++i) {
             Log.d(TAG, parts.get(i));
-            if (parts.get(i).indexOf(mContext.getString(R.string.unit)) != -1)
+            if (parts.get(i).indexOf(mContext.getString(R.string.income_checker)) != -1)
                 cost = parsingCost(parts.get(i));
+            else if (parts.get(i).indexOf(mContext.getString(R.string.outcome_checker)) != -1)
+                cost = "-" + parsingCost(parts.get(i));
         }
         Log.d(TAG, "cost : " + cost);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         long currentTimeMillis = System.currentTimeMillis();
         String key = sdf.format(new Date(currentTimeMillis));
         if (cost != "") {
-            InOutcome ioc = new InOutcome(-Integer.valueOf(cost), parts.get(parts.size()-1));
+            InOutcome ioc = new InOutcome(Integer.valueOf(cost), parts.get(parts.size()-1));
             DataLab.get(mContext).addData(key, ioc);
             Toast.makeText(mContext, R.string.added_a_inoutcome, Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(mContext, R.string.cannot_add_inoutcome, Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private String parsingCost(String cost) {
