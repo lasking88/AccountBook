@@ -71,7 +71,7 @@ public class InputActivity extends AppCompatActivity {
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mDetailInOutcome == null || mCostInOutcome == null) {
+                if (mDetailInOutcome.getText().toString().equals("") || mCostInOutcome.getText().toString().equals("")) {
                     Toast.makeText(InputActivity.this, R.string.fill_in_the_blank, Toast.LENGTH_SHORT).show();
                 } else if (mRadioGroup.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(InputActivity.this, R.string.check_inoutcome, Toast.LENGTH_SHORT).show();
