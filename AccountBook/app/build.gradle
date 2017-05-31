@@ -1,3 +1,18 @@
+plugins {
+    id "org.sonarqube" version "2.2.1"
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectName", "AccountBook"
+        property "sonar.projectKey", "SQKey"
+        property "sonar.sources","src/main/java"
+        property "sonar.language","java"
+        property "sonar.sourceEncoding", "UTF-8"
+//        property "sonar.exclusions", "src/main/java/com/foo/Foo.java"
+    }
+}
+
 apply plugin: 'com.android.application'
 
 android {
@@ -36,12 +51,6 @@ dependencies {
     compile 'com.google.android.gms:play-services-vision:9.4.0+'
     compile 'com.google.android.gms:play-services:10.2.6'
     testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'design'
-        exclude group: 'com.android.support', module: 'recyclerview-v7'
-    }
     androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-v4'
